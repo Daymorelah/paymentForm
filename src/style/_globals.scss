@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+  max-height: 100%;
+}
+
+body {
+  background: $white;
+  color: $dark;
+  font-family: $primary-font; 
+}
+
+h3 {
+  margin: 0;
+}
+
+button {
+  outline: none;
+  border: none;
+  background: $primary;
+  color: $white;
+  border-radius: 0.3em;
+  display: block;
+  width: 80%;
+  font-family: $primary-font;
+  height: 1.9em;
+  padding: 0.4em;
+  margin: 0.8em auto;
+  font-size: 0.9em;
+  font-weight: 900;
+  cursor: pointer;
+
+  &:disabled {
+    background: $grey;
+    font-size: 1em;
+    font-style: italic;
+  }
+}
