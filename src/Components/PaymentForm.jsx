@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import FormInput from './formInput';
 import Button from './button';
 import FullName from './fullName';
+import Email from './email';
 
 const PaymentForm = () => {
   const [isValidEntry, setIsValidEntry] = useState(false);
@@ -11,13 +12,7 @@ const PaymentForm = () => {
       <h3>Please fill the form below</h3>
       <form>
         <FullName setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <FormInput
-          type="email"
-          id="email"
-          placeHolder="Email"
-          value={''}
-          onChange={() => {}}
-        />
+        <Email setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <FormInput
           type="tel"
           id="phone_number"
