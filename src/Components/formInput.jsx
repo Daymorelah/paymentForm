@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FormInput = ({
-  onChange, placeHolder, id, type, value,
+  onChange, placeHolder, id, type, value, onBlur,
 }) => (
   <input
     type={type}
@@ -10,6 +10,7 @@ const FormInput = ({
     onChange={onChange}
     value={value}
     placeholder={placeHolder}
+    onBlur={onBlur}
   />
 );
 
@@ -19,6 +20,7 @@ FormInput.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
 };
 
 export default FormInput;
