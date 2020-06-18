@@ -7,6 +7,7 @@ import PhoneNumber from './phoneNumber';
 import PasswordField from './passwordField';
 import ConfirmPassword from './confirmPasswordField';
 import CardNumber from './cardNumber';
+import CardExpirationDate from './cardExpirationDate';
 
 const PaymentForm = () => {
   const [isValidEntry, setIsValidEntry] = useState(false);
@@ -28,13 +29,7 @@ const PaymentForm = () => {
           initialPassword={initialPassword}  
         />
         <CardNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <FormInput
-          type="date"
-          id="expiration_date"
-          placeHolder="Expiration date"
-          value={''}
-          onChange={() => {}}
-        />
+        <CardExpirationDate setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <FormInput
           type="number"
           id="pin"
