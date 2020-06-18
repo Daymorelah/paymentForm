@@ -3,6 +3,7 @@ import FormInput from './formInput';
 import Button from './button';
 import FullName from './fullName';
 import Email from './email';
+import PhoneNumber from './phoneNumber';
 
 const PaymentForm = () => {
   const [isValidEntry, setIsValidEntry] = useState(false);
@@ -13,13 +14,7 @@ const PaymentForm = () => {
       <form>
         <FullName setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <Email setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <FormInput
-          type="tel"
-          id="phone_number"
-          placeHolder="Phone number"
-          value={''}
-          onChange={() => {}}
-        />
+        <PhoneNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <FormInput
           type="password"
           id="password"
