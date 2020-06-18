@@ -5,9 +5,11 @@ import FullName from './fullName';
 import Email from './email';
 import PhoneNumber from './phoneNumber';
 import PasswordField from './passwordField';
+import ConfirmPassword from './confirmPasswordField';
 
 const PaymentForm = () => {
   const [isValidEntry, setIsValidEntry] = useState(false);
+  const [initialPassword, setInitialPassword] = useState('')
   
   return (
     <div id='form-container'>
@@ -16,13 +18,13 @@ const PaymentForm = () => {
         <FullName setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <Email setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <PhoneNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <PasswordField setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <FormInput
-          type="password"
-          id="confirm_password"
-          placeHolder="Confirm password"
-          value={''}
-          onChange={() => {}}
+        <PasswordField setIsValidEntry={async(isValid, password) => {
+          await setIsValidEntry(isValid);
+          await setInitialPassword(password)
+        }} />
+        <ConfirmPassword
+          setIsValidEntry={(isValid) => setIsValidEntry(isValid)}
+          initialPassword={initialPassword}  
         />
         <FormInput
           type="number"
