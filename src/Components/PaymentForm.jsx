@@ -6,6 +6,7 @@ import Email from './email';
 import PhoneNumber from './phoneNumber';
 import PasswordField from './passwordField';
 import ConfirmPassword from './confirmPasswordField';
+import CardNumber from './cardNumber';
 
 const PaymentForm = () => {
   const [isValidEntry, setIsValidEntry] = useState(false);
@@ -26,13 +27,7 @@ const PaymentForm = () => {
           setIsValidEntry={(isValid) => setIsValidEntry(isValid)}
           initialPassword={initialPassword}  
         />
-        <FormInput
-          type="number"
-          id="card_number"
-          placeHolder="Card number"
-          value={''}
-          onChange={() => {}}
-        />
+        <CardNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <FormInput
           type="date"
           id="expiration_date"
