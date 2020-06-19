@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import FormInput from './formInput';
 import Button from './button';
 import FullName from './fullName';
 import Email from './email';
@@ -8,6 +7,7 @@ import PasswordField from './passwordField';
 import ConfirmPassword from './confirmPasswordField';
 import CardNumber from './cardNumber';
 import CardExpirationDate from './cardExpirationDate';
+import CardPin from './cardPin';
 
 const PaymentForm = () => {
   const [isValidEntry, setIsValidEntry] = useState(false);
@@ -30,13 +30,7 @@ const PaymentForm = () => {
         />
         <CardNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         <CardExpirationDate setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <FormInput
-          type="number"
-          id="pin"
-          placeHolder="Card pin"
-          value={''}
-          onChange={() => {}}
-        />
+        <CardPin setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
         {
           isValidEntry ? (
             <Button

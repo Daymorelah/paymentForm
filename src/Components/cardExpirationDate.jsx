@@ -22,6 +22,9 @@ const CardExpirationDate = ({ setIsValidEntry, }) => {
     if(parseInt(currentInputValue[0], 10) < 1){
       return setIsValidEntry(false);
     }
+    if(!inputValue.length){
+      return setIsValidEntry(false);
+    }
     return setIsValidEntry(true);
   }
   return (

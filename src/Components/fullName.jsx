@@ -15,6 +15,10 @@ const FullName = ({ setIsValidEntry, }) => {
       return setIsValidEntry(false);
     }
 
+    if(!currentInputValue.length){
+      return setIsValidEntry(false);
+    }
+
     const arrayOfNames = currentInputValue.split(' ');
 
     if(arrayOfNames.length !== 2) {

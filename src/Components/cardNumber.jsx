@@ -17,6 +17,9 @@ const CardNumber = ({ setIsValidEntry, }) => {
       setInputValue('');
       return setIsValidEntry(false);
     }
+    if(!inputValue.length){
+      return setIsValidEntry(false);
+    }
     return setIsValidEntry(true);
   }
   return (

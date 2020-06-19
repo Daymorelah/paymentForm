@@ -9,6 +9,9 @@ const Email = ({ setIsValidEntry, }) => {
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(currentInputValue)) {
       return setIsValidEntry(true);
     }
+    if(!currentInputValue.length){
+      return setIsValidEntry(false);
+    }
     return setIsValidEntry(false)
   }
 

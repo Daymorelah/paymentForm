@@ -21,7 +21,9 @@ const PhoneNumber = ({ setIsValidEntry, }) => {
     if(currentInputValue[2] > 1) {
       return setIsValidEntry(false);
     }
-    console.log('logged outside');
+    if(!currentInputValue.length){
+      return setIsValidEntry(false);
+    }
     return setIsValidEntry(true);
   }
   return (
