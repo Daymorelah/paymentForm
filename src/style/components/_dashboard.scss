@@ -1,0 +1,10 @@
+#dashboard {
+  height: 20em;
+  text-align: center;
+  #dashboard_message {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
