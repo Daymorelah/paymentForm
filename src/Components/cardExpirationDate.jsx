@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import FormInput from './formInput';
+import ErrorField from './ErrorField';
 
 const CardExpirationDate = ({ setIsValidEntry, }) => {
   const [inputValue, setInputValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   
   const handleOnChange = (value) => {
     if(inputValue.length === 2 && (inputValue[inputValue.length-1] !== '/')) {
@@ -14,12 +17,18 @@ const CardExpirationDate = ({ setIsValidEntry, }) => {
   const validateInputField = () => {
     const currentInputValue = inputValue.trim().split('/');
     if(/[^0-9/]/.test(currentInputValue.join(''))){
+      setErrorMessage('Date must contain numbers only');
+      setShowError(true);
       return setIsValidEntry(false);
     }
     if(parseInt(currentInputValue[0], 10) > 12){
+      setErrorMessage('Date must contain a valid month');
+      setShowError(true);
       return setIsValidEntry(false);
     }
     if(parseInt(currentInputValue[0], 10) < 1){
+      setErrorMessage('Date must contain a valid month');
+      setShowError(true);
       return setIsValidEntry(false);
     }
     if(!inputValue.length){
@@ -28,14 +37,20 @@ const CardExpirationDate = ({ setIsValidEntry, }) => {
     return setIsValidEntry(true);
   }
   return (
-    <FormInput
-      type="text"
-      id="expiration_date"
-      placeHolder="Expiration date"
-      value={inputValue}
-      onChange={event => handleOnChange(event.target.value)}
-      onBlur={() => validateInputField()}
-    />
+    <>
+      <FormInput
+        type="text"
+        id="expiration_date"
+        placeHolder="Expiration date"
+        value={inputValue}
+        onChange={event => {
+          handleOnChange(event.target.value);
+          setShowError(false);
+        }}
+        onBlur={() => validateInputField()}
+      />
+      {showError ? <ErrorField message={errorMessage} /> : null}
+    </>
   );
 }
 

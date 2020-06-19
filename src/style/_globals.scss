@@ -14,7 +14,16 @@ body {
   font-family: $primary-font; 
 }
 
-h3 {
+#error-message {
+  color: $red;
+  font-size: 10px;
+  text-align: start;
+  font-style: italic;
+  width: 80%;
+  margin: auto;
+}
+
+h3, h4 {
   margin: 0;
 }
 

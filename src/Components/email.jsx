@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import FormInput from './formInput';
+import ErrorField from './ErrorField';
 
 const Email = ({ setIsValidEntry, }) => {
   const [inputValue, setInputValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
     if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(currentInputValue)) {
+      setErrorMessage('Please enter a valid email address');
+      setShowError(true);
       return setIsValidEntry(true);
     }
     if(!currentInputValue.length){
@@ -16,14 +21,20 @@ const Email = ({ setIsValidEntry, }) => {
   }
 
   return (
-    <FormInput 
-      type="text"
-      id="email"
-      placeHolder="Email"
-      value={inputValue}
-      onChange={event => setInputValue(event.target.value)}
-      onBlur={() => validateInputField()}
-    />
+    <>
+      <FormInput 
+        type="text"
+        id="email"
+        placeHolder="Email"
+        value={inputValue}
+        onChange={event => {
+          setInputValue(event.target.value);
+          setShowError(false);
+        }}
+        onBlur={() => validateInputField()}
+      />
+      {showError ? <ErrorField message={errorMessage} /> : null}
+    </>
   );
 };
 
