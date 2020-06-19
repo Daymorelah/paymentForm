@@ -48,6 +48,10 @@ const CardExpirationDate = ({ setIsValidEntry, }) => {
           setShowError(false);
         }}
         onBlur={() => validateInputField()}
+        maxLength="5"
+        onKeyDown={event => {
+          if (event.key === 'Backspace') return setInputValue('')
+        }}
       />
       {showError ? <ErrorField message={errorMessage} /> : null}
     </>

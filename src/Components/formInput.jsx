@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const FormInput = ({
   onChange, placeHolder, id, type, value, onBlur,
-  maxLength, size,
+  maxLength, size, onKeyDown,
 }) => (
   <input
     type={type}
@@ -14,6 +14,7 @@ const FormInput = ({
     onBlur={onBlur}
     maxLength={maxLength}
     size={size}
+    onKeyDown={onKeyDown}
   />
 );
 
@@ -26,6 +27,7 @@ FormInput.propTypes = {
   onBlur: PropTypes.func.isRequired,
   maxLength: PropTypes.string,
   size: PropTypes.string,
+  onKeyDown: PropTypes.func,
 };
 
 export default FormInput;

@@ -41,6 +41,9 @@ const CardNumber = ({ setIsValidEntry, }) => {
         onBlur={() => validateInputField()}
         maxLength="19"
         size="19"
+        onKeyDown={event => {
+          if (event.key === 'Backspace') return setInputValue('')
+        }}
       />
       {showError ? <ErrorField message={errorMessage} /> : null}
     </>
