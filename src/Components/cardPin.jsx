@@ -1,15 +1,22 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import FormInput from './formInput';
+import ErrorField from './ErrorField';
 
 const CardPin = ({ setIsValidEntry, }) => {
   const [inputValue, setInputValue] = useState('');
-  const currentInputValue = inputValue.trim();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const validateInputField = () => {
+    const currentInputValue = inputValue.trim();
     if(/[^0-9]/.test(currentInputValue)) {
+      setErrorMessage('Card pin must contain numbers only');
+      setShowError(true);
       return setIsValidEntry(false);
     }
     if(currentInputValue.length !== 4) {
+      setErrorMessage('Card pin mus be 4 digits only.');
+      setShowError(true);
       return setIsValidEntry(false);
     }
     if(!currentInputValue.length) {
@@ -18,14 +25,20 @@ const CardPin = ({ setIsValidEntry, }) => {
     return setIsValidEntry(true);
   }
   return (
-    <FormInput
-      type="text"
-      id="pin"
-      placeHolder="Card pin"
-      value={inputValue}
-      onChange={event => setInputValue(event.target.value)}
-      onBlur={() => validateInputField()}
-    />
+    <>
+      <FormInput
+        type="text"
+        id="pin"
+        placeHolder="Card pin"
+        value={inputValue}
+        onChange={event => {
+          setInputValue(event.target.value);
+          setShowError(false);
+        }}
+        onBlur={() => validateInputField()}
+      />
+      {showError ? <ErrorField message={errorMessage} /> : null}
+    </>
   );
 }
 
