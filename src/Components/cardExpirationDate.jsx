@@ -16,25 +16,25 @@ const CardExpirationDate = ({ setIsValidEntry, }) => {
   }
   const validateInputField = () => {
     const currentInputValue = inputValue.trim().split('/');
+    if(!inputValue.length){
+      return setIsValidEntry(false, undefined);
+    }
     if(/[^0-9/]/.test(currentInputValue.join(''))){
       setErrorMessage('Date must contain numbers only');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'card expiry');
     }
     if(parseInt(currentInputValue[0], 10) > 12){
       setErrorMessage('Date must contain a valid month');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'card expiry');
     }
     if(parseInt(currentInputValue[0], 10) < 1){
       setErrorMessage('Date must contain a valid month');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'card expiry');
     }
-    if(!inputValue.length){
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(true);
+    return setIsValidEntry(true, 'card expiry');
   }
   return (
     <>

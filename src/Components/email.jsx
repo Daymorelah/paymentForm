@@ -9,15 +9,17 @@ const Email = ({ setIsValidEntry, }) => {
   const [showError, setShowError] = useState(false);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
-    if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(currentInputValue)) {
+    if(!currentInputValue.length){
+      return setIsValidEntry(false, undefined);
+    }
+
+    if (!(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(currentInputValue))) {
       setErrorMessage('Please enter a valid email address');
       setShowError(true);
-      return setIsValidEntry(true);
+      return setIsValidEntry(false, 'email');
     }
-    if(!currentInputValue.length){
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(false)
+
+    return setIsValidEntry(true, 'email');
   }
 
   return (

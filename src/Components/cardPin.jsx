@@ -9,25 +9,26 @@ const CardPin = ({ setIsValidEntry, }) => {
   const [showError, setShowError] = useState(false);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
+    if(!currentInputValue.length) {
+      return setIsValidEntry(false, undefined);
+    }
     if(/[^0-9]/.test(currentInputValue)) {
       setErrorMessage('Card pin must contain numbers only');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'pin');
     }
     if(currentInputValue.length !== 4) {
       setErrorMessage('Card pin mus be 4 digits only.');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'pin');
     }
-    if(!currentInputValue.length) {
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(true);
+
+    return setIsValidEntry(true, 'pin');
   }
   return (
     <>
       <FormInput
-        type="text"
+        type="password"
         id="pin"
         placeHolder="Card pin"
         value={inputValue}
