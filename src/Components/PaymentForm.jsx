@@ -47,7 +47,9 @@ const PaymentForm = (props) => {
 };
 
 PaymentForm.propTypes = {
-  history: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string, PropTypes.func, PropTypes.object
+  ])).isRequired,
 };
 
 export default PaymentForm;
