@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import Button from './button';
 import FullName from './fullName';
 import Email from './email';
@@ -9,8 +10,8 @@ import CardNumber from './cardNumber';
 import CardExpirationDate from './cardExpirationDate';
 import CardPin from './cardPin';
 
-const PaymentForm = () => {
-  const [isValidEntry, setIsValidEntry] = useState(false);
+const PaymentForm = (props) => {
+  const [isValidEntry, setIsValidEntry] = useState(true);
   const [initialPassword, setInitialPassword] = useState('')
   
   return (
@@ -36,13 +37,17 @@ const PaymentForm = () => {
             <Button
               value='Submit'
               id='submit_button'
-              onClick={() => {}}
+              onClick={() => props.history.push('/dashboard')}
             />
           ) : null
         }
       </form>
     </div>
   );
+};
+
+PaymentForm.propTypes = {
+  history: PropTypes.func.isRequired,
 };
 
 export default PaymentForm;
