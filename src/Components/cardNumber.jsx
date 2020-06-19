@@ -16,16 +16,16 @@ const CardNumber = ({ setIsValidEntry, }) => {
   }
   const validateInputField = () => {
     const currentInputValue = inputValue.split(' ').join('');
+    if(!inputValue.length){
+      return setIsValidEntry(false, undefined);
+    }
     if(/[^0-9]/.test(currentInputValue)) {
       setInputValue('');
       setErrorMessage('Card number must contain only digits');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'card number');
     }
-    if(!inputValue.length){
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(true);
+    return setIsValidEntry(true, 'card number');
   }
   return (
     <>

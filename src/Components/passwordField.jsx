@@ -9,25 +9,25 @@ const PasswordField = ({ setIsValidEntry, }) => {
   const [showError, setShowError] = useState(false);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
-    if( !(/[A-Z]+[0-9]+/.test(currentInputValue)) ){
+    if(!currentInputValue.length){
+      return setIsValidEntry(false, undefined);
+    }
+    if( !(/[A-Z0-9]+/.test(currentInputValue)) ){
       setErrorMessage('Password must contain at least one uppercase character and a number');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'password');
     }
     if( !(/[\W_]/.test(currentInputValue)) ){
       setErrorMessage('Password must contain at least one special character');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'password');
     }
     if(currentInputValue.length < 6) {
       setErrorMessage('Password must be more than 5 characters');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'password');
     }
-    if(!currentInputValue.length){
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(true, currentInputValue);
+    return setIsValidEntry(true, 'password', currentInputValue);
   }
   return (
     <>

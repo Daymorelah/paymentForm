@@ -10,30 +10,45 @@ import CardNumber from './cardNumber';
 import CardExpirationDate from './cardExpirationDate';
 import CardPin from './cardPin';
 
+
 const PaymentForm = (props) => {
-  const [isValidEntry, setIsValidEntry] = useState(true);
-  const [initialPassword, setInitialPassword] = useState('')
-  
+  const [initialPassword, setInitialPassword] = useState('');
+  const [arrayOfValidFields, setNumberOfValidFields] = useState([]);
+  const handleSetNumberOfValidFields = (isValid, validField) => {
+    if(isValid) {
+      const newFiled = {};
+      newFiled[validField] = true;
+      return setNumberOfValidFields([...arrayOfValidFields, newFiled])
+    }
+    if(!isValid && (validField !== undefined)) {
+      const newArray = [];
+      arrayOfValidFields.forEach(field => { 
+        if(Object.keys(field)[0] !== validField) newArray.push(field);
+      });
+      setNumberOfValidFields(newArray)
+    }
+  }
   return (
     <div id='form-container'>
       <h3>Please fill the form below</h3>
       <form>
-        <FullName setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <Email setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <PhoneNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <PasswordField setIsValidEntry={async(isValid, password) => {
-          await setIsValidEntry(isValid);
+        <FullName setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)} />
+        <Email setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)} />
+        <PhoneNumber setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)} />
+        <PasswordField setIsValidEntry={async(isValid, validField, password) => {
+          await handleSetNumberOfValidFields(isValid, validField);
           await setInitialPassword(password)
         }} />
         <ConfirmPassword
-          setIsValidEntry={(isValid) => setIsValidEntry(isValid)}
+          setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)}
           initialPassword={initialPassword}  
         />
-        <CardNumber setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <CardExpirationDate setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
-        <CardPin setIsValidEntry={(isValid) => setIsValidEntry(isValid)} />
+        <CardNumber setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)} />
+        <CardExpirationDate setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)} />
+        <CardPin setIsValidEntry={(isValid, validField) => handleSetNumberOfValidFields(isValid, validField)} />
+        {console.log(arrayOfValidFields)}
         {
-          isValidEntry ? (
+          (arrayOfValidFields.length === 8) ? (
             <Button
               value='Submit'
               id='submit_button'

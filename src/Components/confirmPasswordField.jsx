@@ -6,18 +6,19 @@ import ErrorField from './ErrorField';
 const ConfirmPassword = ({ setIsValidEntry, initialPassword, }) => {
   const [inputValue, setInputValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [showError, setShowError] = useState(false);
+  const [showError, setShowError] = useState(false, undefined);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
-    if(currentInputValue !== initialPassword) {
-      setErrorMessage('Passwords must match');
-      setShowError(true);
-      return setIsValidEntry(false);
-    }
     if(!currentInputValue.length){
       return setIsValidEntry(false);
     }
-    return setIsValidEntry(true);
+    if(currentInputValue !== initialPassword) {
+      setErrorMessage('Passwords must match');
+      setShowError(true);
+      return setIsValidEntry(false, 'confirm password');
+    }
+
+    return setIsValidEntry(true, 'confirm password');
   }
   return (
     <>

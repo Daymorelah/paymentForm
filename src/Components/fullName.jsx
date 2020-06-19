@@ -9,21 +9,20 @@ const FullName = ({ setIsValidEntry, }) => {
   const [showError, setShowError] = useState(false);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
+    if(!currentInputValue.length){
+      return setIsValidEntry(false, undefined);
+    }
 
     if(currentInputValue.length < 2) {
       setErrorMessage('First name should be more than two characters');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'name');
     }
 
     if( !(/\s/.test(currentInputValue)) ) {
       setErrorMessage('There must be a space between fist name and last name');
       setShowError(true);
-      return setIsValidEntry(false);
-    }
-
-    if(!currentInputValue.length){
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'name');
     }
 
     const arrayOfNames = currentInputValue.split(' ');
@@ -31,16 +30,16 @@ const FullName = ({ setIsValidEntry, }) => {
     if(arrayOfNames.length !== 2) {
       setErrorMessage('You must enter a first name and a last name');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'name');
     }
 
     if( (arrayOfNames[0].length < 2) || (arrayOfNames[1].length < 2) ) {
       setErrorMessage('Both first name and last name must be more than two characters');
       setShowError(true);
-      return setIsValidEntry(false)
+      return setIsValidEntry(false, 'name')
     }
 
-    return setIsValidEntry(true);
+    return setIsValidEntry(true, 'name');
   }
 
   return (

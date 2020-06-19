@@ -9,35 +9,35 @@ const PhoneNumber = ({ setIsValidEntry, }) => {
   const [showError, setShowError] = useState(false);
   const validateInputField = () => {
     const currentInputValue = inputValue.trim();
+    if(!currentInputValue.length){
+      return setIsValidEntry(false, undefined);
+    }
     if(/[\s\D]/.test(currentInputValue)) {
       setErrorMessage('Phone number must contain only numbers and no spaces');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'phone number');
     }
     if(currentInputValue.length !== 11) {
       setErrorMessage('Phone number must be 11 digits');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'phone number');
     }
     if(currentInputValue[0] !== '0') {
       setErrorMessage('Phone number must start with 0');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'phone number');
     }
     if((currentInputValue[1] < 7) || (currentInputValue[1] > 9) ){
       setErrorMessage('Phone number must be a valid Nigerian number e.g. 070, 081, e.t.c');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'phone number');
     }
     if(currentInputValue[2] > 1) {
       setErrorMessage('Phone number must be a valid Nigerian number e.g. 070, 081, e.t.c');
       setShowError(true);
-      return setIsValidEntry(false);
+      return setIsValidEntry(false, 'phone number');
     }
-    if(!currentInputValue.length){
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(true);
+    return setIsValidEntry(true, 'phone number');
   }
   return (
     <>
