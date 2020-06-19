@@ -9,6 +9,9 @@ const ConfirmPassword = ({ setIsValidEntry, initialPassword, }) => {
     if(currentInputValue !== initialPassword) {
       return setIsValidEntry(false);
     }
+    if(!currentInputValue.length){
+      return setIsValidEntry(false);
+    }
     return setIsValidEntry(true);
   }
   return (
@@ -25,7 +28,7 @@ const ConfirmPassword = ({ setIsValidEntry, initialPassword, }) => {
 
 ConfirmPassword.propTypes = {
   setIsValidEntry: PropTypes.func.isRequired,
-  initialPassword: PropTypes.string.isRequired,
+  initialPassword: PropTypes.string,
 };
 
 

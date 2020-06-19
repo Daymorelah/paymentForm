@@ -2,29 +2,26 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import FormInput from './formInput';
 
-const PasswordField = ({ setIsValidEntry, }) => {
+const CardPin = ({ setIsValidEntry, }) => {
   const [inputValue, setInputValue] = useState('');
   const currentInputValue = inputValue.trim();
   const validateInputField = () => {
-    if( !(/[A-Z]+[0-9]+/.test(currentInputValue)) ){
+    if(/[^0-9]/.test(currentInputValue)) {
       return setIsValidEntry(false);
     }
-    if( !(/[\W_]/.test(currentInputValue)) ){
+    if(currentInputValue.length !== 4) {
       return setIsValidEntry(false);
     }
-    if(currentInputValue.length < 6) {
+    if(!currentInputValue.length) {
       return setIsValidEntry(false);
     }
-    if(!currentInputValue.length){
-      return setIsValidEntry(false);
-    }
-    return setIsValidEntry(true, currentInputValue);
+    return setIsValidEntry(true);
   }
   return (
     <FormInput
-      type="password"
-      id="password"
-      placeHolder="Password"
+      type="text"
+      id="pin"
+      placeHolder="Card pin"
       value={inputValue}
       onChange={event => setInputValue(event.target.value)}
       onBlur={() => validateInputField()}
@@ -32,8 +29,8 @@ const PasswordField = ({ setIsValidEntry, }) => {
   );
 }
 
-PasswordField.propTypes = {
+CardPin.propTypes = {
   setIsValidEntry: PropTypes.func.isRequired,
 };
 
-export default PasswordField;
+export default CardPin;
